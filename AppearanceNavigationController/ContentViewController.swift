@@ -11,6 +11,12 @@ import UIKit
 
 class ContentViewController: UIViewController, AppearanceNavigationControllerContent {
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.rightBarButtonItem = editButtonItem()
+    }
+    
     var appearance: Appearance? {
         didSet {
             setNeedsUpdateNavigationControllerAppearance()
@@ -19,7 +25,11 @@ class ContentViewController: UIViewController, AppearanceNavigationControllerCon
     
     // mark: - Actions
     
-    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        setNeedsStatusBarAppearanceUpdate()
+    }
     
     // mark: - AppearanceNavigationControllerContent
 
