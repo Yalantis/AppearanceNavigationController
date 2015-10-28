@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ContentViewController: UIViewController, AppearanceNavigationControllerContent {
+class ContentViewController: UIViewController, AppearanceNavigationControllerContext {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 
-public protocol AppearanceNavigationControllerContent: class {
+public protocol AppearanceNavigationControllerContext: class {
     
     func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool
     func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool
@@ -11,7 +11,7 @@ public protocol AppearanceNavigationControllerContent: class {
     func setNeedsUpdateNavigationControllerAppearance()
 }
 
-extension AppearanceNavigationControllerContent {
+extension AppearanceNavigationControllerContext {
     
     func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool {
         return false
