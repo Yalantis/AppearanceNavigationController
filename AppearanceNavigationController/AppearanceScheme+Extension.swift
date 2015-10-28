@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-extension AppearanceScheme {
+extension Appearance {
     
-    static func randomScheme() -> AppearanceScheme {
-        var value = AppearanceScheme()
+    static func random() -> Appearance {
+        var value = Appearance()
         value.navigationBarDropsShadow = arc4random_uniform(2) == 1
 
         let navigationBarColor = UIColor.randomColor()
@@ -28,8 +28,8 @@ extension AppearanceScheme {
         return value
     }
     
-    static let lightScheme: AppearanceScheme = {
-        var value = AppearanceScheme()
+    static let light: Appearance = {
+        var value = Appearance()
         value.navigationBarDropsShadow = true
         value.navigationBarColor = UIColor.lightGrayColor()
         value.navigationBarTintColor = UIColor.whiteColor()

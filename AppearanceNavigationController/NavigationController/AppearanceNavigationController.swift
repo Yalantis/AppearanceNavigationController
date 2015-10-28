@@ -30,16 +30,20 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         navigationController: UINavigationController,
         willShowViewController viewController: UIViewController, animated: Bool
     ) {
-        applyViewControllerAppearance(viewController, animated: animated)
-        setNavigationBarHidden(viewController.prefersNavigationControllerBarHidden(self), animated: animated)
-        setToolbarHidden(viewController.prefersNavigationControllerToolbarHidden(self), animated: animated)
+        guard let content = viewController as? AppearanceNavigationControllerContent else {
+            return
+        }
+        
+        setNavigationBarHidden(content.prefersNavigationControllerBarHidden(self), animated: animated)
+        setToolbarHidden(content.prefersNavigationControllerToolbarHidden(self), animated: animated)
+        applyAppearance(content.preferredNavigationControllerAppearance(self), animated: animated)
         
         guard let coordinator = viewController.transitionCoordinator() where coordinator.isInteractive() else {
             return
         }
         
         coordinator.animateAlongsideTransition({ _ in }, completion: { context in
-            if context.isCancelled(), let top = self.topViewController {
+            if context.isCancelled(), let top = self.topViewController as? AppearanceNavigationControllerContent {
                 // hiding navigation bar & toolbar within interaction completion will result into inconsistent UI state
                 self.setNavigationBarHidden(top.prefersNavigationControllerBarHidden(self), animated: animated)
                 self.setToolbarHidden(top.prefersNavigationControllerToolbarHidden(self), animated: animated)
@@ -47,14 +51,17 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         })
         
         coordinator.notifyWhenInteractionEndsUsingBlock { context in
-            if context.isCancelled(), let from = context.viewControllerForKey(UITransitionContextFromViewControllerKey) {
+            let key = UITransitionContextFromViewControllerKey
+            if context.isCancelled(), let from = context.viewControllerForKey(key) as? AppearanceNavigationControllerContent {
                 // changing navigation bar & toolbar appearance within animate completion will result into UI glitch
-                self.applyViewControllerAppearance(from, animated: animated)
+                self.applyAppearance(from.preferredNavigationControllerAppearance(self), animated: true)
             }
         }
     }
     
-    private func applyAppearanceScheme(appearance: Appearance, animated: Bool) {
+    private func applyAppearance(appearance: Appearance?, animated: Bool) {
+        
+        
         appliedAppearance = appearance
         
         UIView.beginAnimations("transition", context: nil)
@@ -68,20 +75,18 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         UIView.commitAnimations()
     }
     
-    private func applyViewControllerAppearance(controller: UIViewController, animated: Bool) {
-        if let value = controller.preferredNavigationControllerAppearance(self) where value != appliedAppearance {
-            applyAppearanceScheme(value, animated: animated)
-        }
-    }
-    
     private var appliedAppearance: Appearance?
     
     private func updateAppearanceForViewController(viewController: UIViewController) {
-        if let top = topViewController where top == viewController && transitionCoordinator() == nil {
-            setNavigationBarHidden(viewController.prefersNavigationControllerBarHidden(self), animated: true)
-            setToolbarHidden(viewController.prefersNavigationControllerToolbarHidden(self), animated: true)
-
-            applyViewControllerAppearance(viewController, animated: true)
+        if let
+            content = viewController as? AppearanceNavigationControllerContent,
+            top = topViewController
+            where
+            top == viewController && transitionCoordinator() == nil
+        {
+            setNavigationBarHidden(content.prefersNavigationControllerBarHidden(self), animated: true)
+            setToolbarHidden(content.prefersNavigationControllerToolbarHidden(self), animated: true)
+            applyAppearance(content.preferredNavigationControllerAppearance(self), animated: true)
         }
     }
     
@@ -96,7 +101,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     }
 }
 
-public protocol AppearanceNavigationControllerContent {
+public protocol AppearanceNavigationControllerContent: class {
     
     func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool
     func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool
@@ -105,21 +110,26 @@ public protocol AppearanceNavigationControllerContent {
     func setNeedsUpdateNavigationControllerAppearanceScheme()
 }
 
-extension UIViewController: AppearanceNavigationControllerContent {
+extension AppearanceNavigationControllerContent {
     
-    public func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool {
+    func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool {
         return false
     }
     
-    public func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool {
+    func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool {
         return true
     }
     
-    public func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
         return nil
     }
     
-    public func setNeedsUpdateNavigationControllerAppearanceScheme() {
-        (navigationController as? AppearanceNavigationController)?.updateAppearanceForViewController(self)
+    func setNeedsUpdateNavigationControllerAppearanceScheme() {
+        if let
+            viewController = self as? UIViewController,
+            navigationController = viewController.navigationController as? AppearanceNavigationController
+        {
+            navigationController.updateAppearanceForViewController(viewController)
+        }
     }
 }

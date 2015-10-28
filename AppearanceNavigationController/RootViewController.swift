@@ -10,11 +10,11 @@ import UIKit
 
 class RootViewController: UITableViewController {
 
-    private let schemes: [AppearanceScheme] = (0..<10).map { _ in AppearanceScheme.randomScheme() }
+    private let values: [Appearance] = (0..<10).map { _ in Appearance.random() }
     
     // mark: - UITableViewDataSource
     
-    public func preferredNavigationControllerAppearanceScheme(navigationController: AppearanceNavigationController) -> AppearanceScheme? {
+    override func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
         return nil
     }
 }
