@@ -8,14 +8,14 @@
 
 import UIKit
 
-class RootViewController: UITableViewController {
+class RootViewController: UITableViewController, AppearanceNavigationControllerContent {
 
     private let values: [Appearance] = (0..<10).map { _ in Appearance.random() }
     
     // mark: - UITableViewDataSource
     
-    override func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
-        return nil
+    func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
+        return Appearance.lightAppearance
     }
 }
 

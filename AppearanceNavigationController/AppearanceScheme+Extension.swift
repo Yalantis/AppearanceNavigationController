@@ -28,7 +28,7 @@ extension Appearance {
         return value
     }
     
-    static let light: Appearance = {
+    static let lightAppearance: Appearance = {
         var value = Appearance()
         value.navigationBarDropsShadow = true
         value.navigationBarColor = UIColor.lightGrayColor()
