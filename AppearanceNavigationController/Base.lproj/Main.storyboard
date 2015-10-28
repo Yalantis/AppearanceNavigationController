@@ -59,9 +59,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="KWI-DJ-DOf"/>
                         <barButtonItem title="Item" id="H2k-3F-g0B" userLabel="Toolbar Item #1"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Sample" id="j0X-bh-jFW" userLabel="Navigation Item">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="47v-GT-Xz6"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Sample" id="j0X-bh-jFW" userLabel="Navigation Item"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCf-6q-mz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
