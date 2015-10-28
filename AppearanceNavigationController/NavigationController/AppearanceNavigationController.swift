@@ -69,16 +69,8 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     }
     
     private func applyViewControllerAppearance(controller: UIViewController, animated: Bool) {
-        switch (controller.preferredNavigationControllerAppearanceScheme(self), appliedAppearanceScheme) {
-        case (let value?, let appliedValue?) where value != appliedValue:
+        if let value = controller.preferredNavigationControllerAppearanceScheme(self) where value != appliedAppearanceScheme {
             applyAppearanceScheme(value, animated: animated)
-            
-        case (let value?, nil):
-            applyAppearanceScheme(value, animated: animated)
-            
-        default:
-            // no-op
-            break
         }
     }
     

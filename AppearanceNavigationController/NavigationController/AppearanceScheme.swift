@@ -3,6 +3,7 @@ import Foundation
 import UIKit
 
 public struct AppearanceScheme: Equatable {
+    
     var navigationBarDropsShadow = false
     var statusBarStyle: UIStatusBarStyle = .Default
     var navigationBarColor = UIColor.clearColor()

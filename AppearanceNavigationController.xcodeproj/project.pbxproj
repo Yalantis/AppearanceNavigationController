@@ -12,8 +12,8 @@
 		ADF894A01BE0D3C800C35CAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADF8949E1BE0D3C800C35CAC /* Main.storyboard */; };
 		ADF894A21BE0D3C800C35CAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADF894A11BE0D3C800C35CAC /* Assets.xcassets */; };
 		ADF894A51BE0D3C800C35CAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADF894A31BE0D3C800C35CAC /* LaunchScreen.storyboard */; };
-		ADF894AD1BE0D3FC00C35CAC /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894AC1BE0D3FC00C35CAC /* AppearanceNavigationController.swift */; };
-		ADF894AF1BE0E63C00C35CAC /* AppearanceScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894AE1BE0E63C00C35CAC /* AppearanceScheme.swift */; };
+		ADF894B31BE0E71700C35CAC /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B11BE0E71700C35CAC /* AppearanceNavigationController.swift */; };
+		ADF894B41BE0E71700C35CAC /* AppearanceScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B21BE0E71700C35CAC /* AppearanceScheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +24,8 @@
 		ADF894A11BE0D3C800C35CAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADF894A41BE0D3C800C35CAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADF894A61BE0D3C800C35CAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADF894AC1BE0D3FC00C35CAC /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
-		ADF894AE1BE0E63C00C35CAC /* AppearanceScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceScheme.swift; sourceTree = "<group>"; };
+		ADF894B11BE0E71700C35CAC /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
+		ADF894B21BE0E71700C35CAC /* AppearanceScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceScheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +58,7 @@
 		ADF894991BE0D3C800C35CAC /* AppearanceNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				ADF894AC1BE0D3FC00C35CAC /* AppearanceNavigationController.swift */,
-				ADF894AE1BE0E63C00C35CAC /* AppearanceScheme.swift */,
+				ADF894B01BE0E71700C35CAC /* NavigationController */,
 				ADF8949A1BE0D3C800C35CAC /* AppDelegate.swift */,
 				ADF8949C1BE0D3C800C35CAC /* ViewController.swift */,
 				ADF8949E1BE0D3C800C35CAC /* Main.storyboard */,
@@ -68,6 +67,15 @@
 				ADF894A61BE0D3C800C35CAC /* Info.plist */,
 			);
 			path = AppearanceNavigationController;
+			sourceTree = "<group>";
+		};
+		ADF894B01BE0E71700C35CAC /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				ADF894B11BE0E71700C35CAC /* AppearanceNavigationController.swift */,
+				ADF894B21BE0E71700C35CAC /* AppearanceScheme.swift */,
+			);
+			path = NavigationController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +149,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADF894AD1BE0D3FC00C35CAC /* AppearanceNavigationController.swift in Sources */,
 				ADF8949D1BE0D3C800C35CAC /* ViewController.swift in Sources */,
-				ADF894AF1BE0E63C00C35CAC /* AppearanceScheme.swift in Sources */,
+				ADF894B31BE0E71700C35CAC /* AppearanceNavigationController.swift in Sources */,
+				ADF894B41BE0E71700C35CAC /* AppearanceScheme.swift in Sources */,
 				ADF8949B1BE0D3C800C35CAC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
