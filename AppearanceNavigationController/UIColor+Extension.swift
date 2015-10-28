@@ -27,6 +27,10 @@ extension UIColor {
         return brightness
     }
     
+    var isBright: Bool {
+        return brightness > 0.5
+    }
+    
     var inversedColor: UIColor {
         var red: CGFloat = 0
         var green: CGFloat = 0

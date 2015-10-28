@@ -108,4 +108,8 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return appliedAppearance?.statusBarStyle ?? .Default
     }
+    
+    public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Fade
+    }
 }

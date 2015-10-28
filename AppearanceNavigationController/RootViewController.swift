@@ -20,7 +20,13 @@ class RootViewController: UITableViewController, AppearanceNavigationControllerC
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! // fine for sample app
+        let appearance = values[indexPath.row]
+        
+        cell.contentView.backgroundColor = appearance.navigationBarColor
+        cell.textLabel?.textColor = appearance.navigationBarTintColor
         cell.textLabel?.text = "Sample #\(indexPath.row + 1)"
+        cell.textLabel?.backgroundColor = UIColor.clearColor()
+        
         return cell
     }
     
