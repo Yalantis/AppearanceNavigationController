@@ -19,7 +19,7 @@ class RootViewController: UITableViewController, AppearanceNavigationControllerC
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! // fine for sample app
         cell.textLabel?.text = "Sample #\(indexPath.row + 1)"
         return cell
     }

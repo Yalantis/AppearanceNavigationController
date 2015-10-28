@@ -58,10 +58,12 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
             }
         }
     }
+
+    // mark: - Appearance Applying
+    
+    private var appliedAppearance: Appearance?
     
     private func applyAppearance(appearance: Appearance?, animated: Bool) {
-        
-        
         appliedAppearance = appearance
         
         UIView.beginAnimations("transition", context: nil)
@@ -70,14 +72,21 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         UIView.setAnimationTransition(.None, forView: navigationBar, cache: false)
         UIView.setAnimationTransition(.None, forView: toolbar, cache: false)
         
+        appearanceApplyingStrategy.apply(appearance, toNavigationController: self)
         setNeedsStatusBarAppearanceUpdate()
                 
         UIView.commitAnimations()
     }
     
-    private var appliedAppearance: Appearance?
+    public var appearanceApplyingStrategy = AppearanceApplyingStrategy() {
+        didSet {
+            applyAppearance(appliedAppearance, animated: false)
+        }
+    }
     
-    private func updateAppearanceForViewController(viewController: UIViewController) {
+    // mark: - Apperanace Update
+    
+    func updateAppearanceForViewController(viewController: UIViewController) {
         if let
             content = viewController as? AppearanceNavigationControllerContent,
             top = topViewController
@@ -90,7 +99,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
     }
     
-    public func updateAppearanceScheme() {
+    public func updateAppearance() {
         if let top = topViewController {
             updateAppearanceForViewController(top)
         }
@@ -98,38 +107,5 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return appliedAppearance?.statusBarStyle ?? .Default
-    }
-}
-
-public protocol AppearanceNavigationControllerContent: class {
-    
-    func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool
-    func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool
-    func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance?
-    
-    func setNeedsUpdateNavigationControllerAppearance()
-}
-
-extension AppearanceNavigationControllerContent {
-    
-    func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool {
-        return false
-    }
-    
-    func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool {
-        return true
-    }
-    
-    func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
-        return nil
-    }
-    
-    func setNeedsUpdateNavigationControllerAppearance() {
-        if let
-            viewController = self as? UIViewController,
-            navigationController = viewController.navigationController as? AppearanceNavigationController
-        {
-            navigationController.updateAppearanceForViewController(viewController)
-        }
     }
 }
