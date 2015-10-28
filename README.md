@@ -1,0 +1,2 @@
+# AppearanceNavigationController
+Sample of navigation controller appearance configuration
