@@ -14,8 +14,32 @@ class RootViewController: UITableViewController, AppearanceNavigationControllerC
     
     // mark: - UITableViewDataSource
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return values.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
+        cell.textLabel?.text = "Sample #\(indexPath.row + 1)"
+        return cell
+    }
+    
+    // mark: - AppearanceNavigationControllerContent
+    
     func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
         return Appearance.lightAppearance
+    }
+    
+    // mark: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let
+            cell = sender as? UITableViewCell,
+            target = segue.destinationViewController as? ContentViewController,
+            index = tableView.indexPathForCell(cell)?.row
+        {
+            target.appearance = values[index]
+        }
     }
 }
 

@@ -14,8 +14,9 @@
 		ADF894A51BE0D3C800C35CAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADF894A31BE0D3C800C35CAC /* LaunchScreen.storyboard */; };
 		ADF894B31BE0E71700C35CAC /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B11BE0E71700C35CAC /* AppearanceNavigationController.swift */; };
 		ADF894B41BE0E71700C35CAC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B21BE0E71700C35CAC /* Appearance.swift */; };
-		ADF894B71BE0E99300C35CAC /* AppearanceScheme+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B61BE0E99300C35CAC /* AppearanceScheme+Extension.swift */; };
+		ADF894B71BE0E99300C35CAC /* Appearance+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B61BE0E99300C35CAC /* Appearance+Extension.swift */; };
 		ADF894B91BE0E9D300C35CAC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894B81BE0E9D300C35CAC /* UIColor+Extension.swift */; };
+		ADF894BB1BE0F66000C35CAC /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894BA1BE0F66000C35CAC /* ContentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +29,9 @@
 		ADF894A61BE0D3C800C35CAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADF894B11BE0E71700C35CAC /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
 		ADF894B21BE0E71700C35CAC /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		ADF894B61BE0E99300C35CAC /* AppearanceScheme+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppearanceScheme+Extension.swift"; sourceTree = "<group>"; };
+		ADF894B61BE0E99300C35CAC /* Appearance+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Appearance+Extension.swift"; sourceTree = "<group>"; };
 		ADF894B81BE0E9D300C35CAC /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		ADF894BA1BE0F66000C35CAC /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				ADF894B01BE0E71700C35CAC /* NavigationController */,
 				ADF8949A1BE0D3C800C35CAC /* AppDelegate.swift */,
 				ADF8949C1BE0D3C800C35CAC /* RootViewController.swift */,
+				ADF894BA1BE0F66000C35CAC /* ContentViewController.swift */,
 				ADF894B51BE0E98600C35CAC /* Misc */,
 				ADF8949E1BE0D3C800C35CAC /* Main.storyboard */,
 				ADF894A11BE0D3C800C35CAC /* Assets.xcassets */,
@@ -86,7 +89,7 @@
 		ADF894B51BE0E98600C35CAC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				ADF894B61BE0E99300C35CAC /* AppearanceScheme+Extension.swift */,
+				ADF894B61BE0E99300C35CAC /* Appearance+Extension.swift */,
 				ADF894B81BE0E9D300C35CAC /* UIColor+Extension.swift */,
 			);
 			name = Misc;
@@ -164,11 +167,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADF8949D1BE0D3C800C35CAC /* RootViewController.swift in Sources */,
-				ADF894B71BE0E99300C35CAC /* AppearanceScheme+Extension.swift in Sources */,
+				ADF894B71BE0E99300C35CAC /* Appearance+Extension.swift in Sources */,
 				ADF894B31BE0E71700C35CAC /* AppearanceNavigationController.swift in Sources */,
 				ADF894B41BE0E71700C35CAC /* Appearance.swift in Sources */,
 				ADF894B91BE0E9D300C35CAC /* UIColor+Extension.swift in Sources */,
 				ADF8949B1BE0D3C800C35CAC /* AppDelegate.swift in Sources */,
+				ADF894BB1BE0F66000C35CAC /* ContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,6 +24,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="kNY-7h-cRk" kind="show" id="3NO-S7-VtG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -36,6 +39,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIe-SO-nEO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="196" y="534"/>
+        </scene>
+        <!--Sample-->
+        <scene sceneID="kpG-Ax-Bxd">
+            <objects>
+                <viewController id="kNY-7h-cRk" customClass="ContentViewController" customModule="AppearanceNavigationController" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zVH-Zt-Hnh"/>
+                        <viewControllerLayoutGuide type="bottom" id="GrP-Nr-VQ8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TBr-fr-ZKP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="Fwt-o9-XaB" userLabel="Toolbar Item #0"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="KWI-DJ-DOf"/>
+                        <barButtonItem title="Item" id="H2k-3F-g0B" userLabel="Toolbar Item #1"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Sample" id="j0X-bh-jFW" userLabel="Navigation Item">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="47v-GT-Xz6"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KCf-6q-mz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="904" y="534"/>
         </scene>
         <!--Appearance Navigation Controller-->
         <scene sceneID="Nfn-Pd-rM8">

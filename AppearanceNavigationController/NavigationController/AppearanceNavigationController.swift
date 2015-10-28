@@ -107,7 +107,7 @@ public protocol AppearanceNavigationControllerContent: class {
     func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool
     func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance?
     
-    func setNeedsUpdateNavigationControllerAppearanceScheme()
+    func setNeedsUpdateNavigationControllerAppearance()
 }
 
 extension AppearanceNavigationControllerContent {
@@ -124,7 +124,7 @@ extension AppearanceNavigationControllerContent {
         return nil
     }
     
-    func setNeedsUpdateNavigationControllerAppearanceScheme() {
+    func setNeedsUpdateNavigationControllerAppearance() {
         if let
             viewController = self as? UIViewController,
             navigationController = viewController.navigationController as? AppearanceNavigationController
