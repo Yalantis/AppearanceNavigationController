@@ -27,9 +27,14 @@ extension UIColor {
         return brightness
     }
     
-    var inverseColor: UIColor {
-        let components = CGColorGetComponents(CGColor)
-        return UIColor(red: 1 - components[0], green: 1 - components[1], blue: 1 - components[2], alpha: components[3])
+    var inversedColor: UIColor {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return UIColor(red: 1 - red, green: 1 - green, blue: 1 - blue, alpha: alpha)
     }
     
     class func randomColor() -> UIColor {
