@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Appearances-->
         <scene sceneID="Mtc-Qy-oYS">
             <objects>
                 <tableViewController id="LIk-eB-cvG" customClass="RootViewController" customModule="AppearanceNavigationController" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,13 +34,13 @@
                             <outlet property="delegate" destination="LIk-eB-cvG" id="H14-2o-kcI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="KRt-ls-ejY"/>
+                    <navigationItem key="navigationItem" title="Appearances" id="KRt-ls-ejY"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIe-SO-nEO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="196" y="534"/>
         </scene>
-        <!--Sample-->
+        <!--Appearance Sample-->
         <scene sceneID="kpG-Ax-Bxd">
             <objects>
                 <viewController id="kNY-7h-cRk" customClass="ContentViewController" customModule="AppearanceNavigationController" customModuleProvider="target" sceneMemberID="viewController">
@@ -59,7 +59,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="KWI-DJ-DOf"/>
                         <barButtonItem title="Item" id="H2k-3F-g0B" userLabel="Toolbar Item #1"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Sample" id="j0X-bh-jFW" userLabel="Navigation Item"/>
+                    <navigationItem key="navigationItem" title="Appearance Sample" id="j0X-bh-jFW" userLabel="Navigation Item"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCf-6q-mz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
