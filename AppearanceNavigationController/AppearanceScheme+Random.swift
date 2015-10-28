@@ -15,9 +15,16 @@ extension AppearanceScheme {
         var value = AppearanceScheme()
         value.navigationBarDropsShadow = arc4random_uniform(2) == 1
 
-        value.navigationBarColor = UIColor.randomColor()
-        value.navigationBarTintColor = UIColor.randomColor()
-        value.toolbarColor = UIColor.randomColor()
-        value.toolbarTintColor = UIColor.randomColor()
+        let navigationBarColor = UIColor.randomColor()
+        value.navigationBarColor = navigationBarColor
+        value.navigationBarTintColor = navigationBarColor.brightness > 0.5 ? UIColor.blackColor() : UIColor.whiteColor()
+        
+        let toolbarColor = UIColor.randomColor()
+        value.toolbarColor = toolbarColor
+        value.toolbarTintColor = toolbarColor.brightness > 0.5 ? UIColor.blackColor() : UIColor.whiteColor()
+        
+        value.statusBarStyle = navigationBarColor.brightness > 0.5 ? .Default : .LightContent
+        
+        return value
     }
 }

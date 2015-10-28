@@ -14,12 +14,12 @@ class RootViewController: UITableViewController {
         let values: [AppearanceScheme] = (0..<10).map { _ in
             var scheme = AppearanceScheme()
             
-            scheme.navigationBarDropsShadow = 
-            var statusBarStyle: UIStatusBarStyle = .Default
-            var navigationBarColor = UIColor.clearColor()
-            var navigationBarTintColor = UIColor.clearColor()
-            var toolbarColor = UIColor.clearColor()
-            var toolbarTintColor = UIColor.clearColor()
+//            scheme.navigationBarDropsShadow = 
+//            var statusBarStyle: UIStatusBarStyle = .Default
+//            var navigationBarColor = UIColor.clearColor()
+//            var navigationBarTintColor = UIColor.clearColor()
+//            var toolbarColor = UIColor.clearColor()
+//            var toolbarTintColor = UIColor.clearColor()
         }
     }()
     

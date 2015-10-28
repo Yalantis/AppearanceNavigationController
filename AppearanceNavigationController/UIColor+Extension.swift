@@ -12,7 +12,7 @@ import UIKit
 extension UIColor {
     
     // used solution from http://stackoverflow.com/a/29806108/4405316
-    var isLightColor: Bool {
+    var brightness: CGFloat {
         let colorSpace = CGColorGetColorSpace(CGColor)
         let colorSpaceModel = CGColorSpaceGetModel(colorSpace)
         
@@ -24,7 +24,12 @@ extension UIColor {
             getWhite(&brightness, alpha: nil)
         }
         
-        return brightness > 0.5
+        return brightness
+    }
+    
+    var inverseColor: UIColor {
+        let components = CGColorGetComponents(CGColor)
+        return UIColor(red: 1 - components[0], green: 1 - components[1], blue: 1 - components[2], alpha: components[3])
     }
     
     class func randomColor() -> UIColor {
