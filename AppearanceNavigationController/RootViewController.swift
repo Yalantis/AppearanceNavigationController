@@ -10,25 +10,12 @@ import UIKit
 
 class RootViewController: UITableViewController {
 
-    private let schemes: [AppearanceScheme] = {
-        let values: [AppearanceScheme] = (0..<10).map { _ in
-            var scheme = AppearanceScheme()
-            
-//            scheme.navigationBarDropsShadow = 
-//            var statusBarStyle: UIStatusBarStyle = .Default
-//            var navigationBarColor = UIColor.clearColor()
-//            var navigationBarTintColor = UIColor.clearColor()
-//            var toolbarColor = UIColor.clearColor()
-//            var toolbarTintColor = UIColor.clearColor()
-        }
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+    private let schemes: [AppearanceScheme] = (0..<10).map { _ in AppearanceScheme.randomScheme() }
     
     // mark: - UITableViewDataSource
     
+    public func preferredNavigationControllerAppearanceScheme(navigationController: AppearanceNavigationController) -> AppearanceScheme? {
+        return nil
+    }
 }
 

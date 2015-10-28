@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 
-public struct AppearanceScheme: Equatable {
+public struct Appearance: Equatable {
     
     var navigationBarDropsShadow = false
     var statusBarStyle: UIStatusBarStyle = .Default
@@ -12,7 +12,7 @@ public struct AppearanceScheme: Equatable {
     var toolbarTintColor = UIColor.clearColor()
 }
 
-public func ==(lhs: AppearanceScheme, rhs: AppearanceScheme) -> Bool {
+public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
     return
         lhs.navigationBarColor == rhs.navigationBarDropsShadow &&
         lhs.statusBarStyle == rhs.statusBarStyle &&

@@ -27,4 +27,13 @@ extension AppearanceScheme {
         
         return value
     }
+    
+    static let lightScheme: AppearanceScheme = {
+        var value = AppearanceScheme()
+        value.navigationBarDropsShadow = true
+        value.navigationBarColor = UIColor.lightGrayColor()
+        value.navigationBarTintColor = UIColor.whiteColor()
+        value.statusBarStyle = .LightContent
+        return value
+    }()
 }

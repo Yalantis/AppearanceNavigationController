@@ -54,8 +54,8 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
     }
     
-    private func applyAppearanceScheme(appearanceScheme: AppearanceScheme, animated: Bool) {
-        appliedAppearanceScheme = appearanceScheme
+    private func applyAppearanceScheme(appearance: Appearance, animated: Bool) {
+        appliedAppearance = appearance
         
         UIView.beginAnimations("transition", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
@@ -69,12 +69,12 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     }
     
     private func applyViewControllerAppearance(controller: UIViewController, animated: Bool) {
-        if let value = controller.preferredNavigationControllerAppearanceScheme(self) where value != appliedAppearanceScheme {
+        if let value = controller.preferredNavigationControllerAppearance(self) where value != appliedAppearance {
             applyAppearanceScheme(value, animated: animated)
         }
     }
     
-    private var appliedAppearanceScheme: AppearanceScheme?
+    private var appliedAppearance: Appearance?
     
     private func updateAppearanceForViewController(viewController: UIViewController) {
         if let top = topViewController where top == viewController && transitionCoordinator() == nil {
@@ -92,7 +92,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     }
     
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return appliedAppearanceScheme?.statusBarStyle ?? .Default
+        return appliedAppearance?.statusBarStyle ?? .Default
     }
 }
 
@@ -100,7 +100,7 @@ public protocol AppearanceNavigationControllerContent {
     
     func prefersNavigationControllerBarHidden(navigationController: AppearanceNavigationController) -> Bool
     func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool
-    func preferredNavigationControllerAppearanceScheme(navigationController: AppearanceNavigationController) -> AppearanceScheme?
+    func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance?
     
     func setNeedsUpdateNavigationControllerAppearanceScheme()
 }
@@ -115,7 +115,7 @@ extension UIViewController: AppearanceNavigationControllerContent {
         return true
     }
     
-    public func preferredNavigationControllerAppearanceScheme(navigationController: AppearanceNavigationController) -> AppearanceScheme? {
+    public func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
         return nil
     }
     
