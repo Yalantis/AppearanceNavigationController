@@ -40,6 +40,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(self), animated: animated)
         applyAppearance(appearanceContext.preferredNavigationControllerAppearance(self), animated: animated)
         
+        // interactive gesture requires more complex logic. 
         guard let coordinator = viewController.transitionCoordinator() where coordinator.isInteractive() else {
             return
         }
@@ -66,10 +67,12 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     private var appliedAppearance: Appearance?
     
     private func applyAppearance(appearance: Appearance?, animated: Bool) {
-        appliedAppearance = appearance
-                    
-        appearanceApplyingStrategy.apply(appearance, toNavigationController: self, animated: animated)
-        setNeedsStatusBarAppearanceUpdate()
+        if appearance != nil {
+            appliedAppearance = appearance
+            
+            appearanceApplyingStrategy.apply(appearance, toNavigationController: self, animated: animated)
+            setNeedsStatusBarAppearanceUpdate()
+        }
     }
     
     public var appearanceApplyingStrategy = AppearanceApplyingStrategy() {
