@@ -10,13 +10,13 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         delegate = self
     }
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
         delegate = self
     }
     
-    public override init(rootViewController: UIViewController) {
+    override public init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
 
         delegate = self
@@ -101,11 +101,11 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
     }
     
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override public func preferredStatusBarStyle() -> UIStatusBarStyle {
         return appliedAppearance?.statusBarStyle ?? super.preferredStatusBarStyle()
     }
 
-    public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+    override public func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
         return appliedAppearance != nil ? .Fade : super.preferredStatusBarUpdateAnimation()
     }
 }

@@ -1,10 +1,3 @@
-//
-//  AppearanceScheme+Random.swift
-//  AppearanceNavigationController
-//
-//  Created by zen on 28/10/15.
-//  Copyright © 2015 Zen. All rights reserved.
-//
 
 import Foundation
 import UIKit
@@ -39,9 +32,9 @@ extension Appearance {
         return value
     }()
     
-    var inversedAppearance: Appearance {
+    func inverse() -> Appearance {
         var value = Appearance()
-
+        
         value.navigationBarColor = navigationBarColor.inversedColor
         value.navigationBarTintColor = navigationBarTintColor.inversedColor
         value.toolbarColor = toolbarColor.inversedColor
