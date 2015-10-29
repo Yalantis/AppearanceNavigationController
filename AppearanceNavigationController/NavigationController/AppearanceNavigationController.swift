@@ -67,20 +67,8 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     
     private func applyAppearance(appearance: Appearance?, animated: Bool) {
         appliedAppearance = appearance
-            
-        if animated {
-            UIView.beginAnimations("transition", context: nil)
-            UIView.setAnimationBeginsFromCurrentState(true)
-            UIView.setAnimationDuration(0.33)
-            UIView.setAnimationTransition(.None, forView: navigationBar, cache: false)
-            UIView.setAnimationTransition(.None, forView: toolbar, cache: false)
-            
-            defer {
-                UIView.commitAnimations()
-            }
-        }
-        
-        appearanceApplyingStrategy.apply(appearance, toNavigationController: self)
+                    
+        appearanceApplyingStrategy.apply(appearance, toNavigationController: self, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -94,28 +82,27 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     
     func updateAppearanceForViewController(viewController: UIViewController) {
         if let
-            context = viewController as? AppearanceNavigationControllerContext,
-            top = topViewController
+            context = viewController as? AppearanceNavigationControllerContext
             where
-            top == viewController && transitionCoordinator() == nil
+            viewController == topViewController && transitionCoordinator() == nil
         {
             setNavigationBarHidden(context.prefersNavigationControllerBarHidden(self), animated: true)
             setToolbarHidden(context.prefersNavigationControllerToolbarHidden(self), animated: true)
             applyAppearance(context.preferredNavigationControllerAppearance(self), animated: true)
         }
     }
-    
+
     public func updateAppearance() {
         if let top = topViewController {
             updateAppearanceForViewController(top)
         }
     }
     
-public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return appliedAppearance?.statusBarStyle ?? .Default
-}
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return appliedAppearance?.statusBarStyle ?? .Default
+    }
 
-public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-    return .Fade
-}
+    public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Fade
+    }
 }
