@@ -34,10 +34,12 @@ class ContentViewController: UIViewController, AppearanceNavigationControllerCon
     // mark: - AppearanceNavigationControllerContent
 
     func prefersNavigationControllerToolbarHidden(navigationController: AppearanceNavigationController) -> Bool {
+        // hide toolbar during editing
         return editing
     }
     
     func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
+        // inverse navigation bar color and status bar during editing
         return editing ? appearance?.inversedAppearance : appearance
     }
 }
