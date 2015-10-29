@@ -20,6 +20,7 @@ public class AppearanceApplyingStrategy {
                 }
             }
             
+        if !navigationController.navigationBarHidden {
             let background = ImageRenderer.renderImageOfColor(appearance.navigationBarColor)
             navigationBar.setBackgroundImage(background, forBarMetrics: .Default)
             navigationBar.tintColor = appearance.navigationBarTintColor
@@ -28,13 +29,16 @@ public class AppearanceApplyingStrategy {
             navigationBar.titleTextAttributes = [
                 NSForegroundColorAttributeName: appearance.navigationBarTintColor
             ]
-            
+        }
+
+        if !navigationController.toolbarHidden {
             toolbar.setBackgroundImage(
                 ImageRenderer.renderImageOfColor(appearance.toolbarColor),
                 forToolbarPosition: .Any,
                 barMetrics: .Default
             )
             toolbar.tintColor = appearance.toolbarTintColor
+        }
         }
     }
 }
