@@ -99,10 +99,10 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     }
     
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return appliedAppearance?.statusBarStyle ?? .Default
+        return appliedAppearance?.statusBarStyle ?? super.preferredStatusBarStyle()
     }
 
     public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Fade
+        return appliedAppearance != nil ? .Fade : super.preferredStatusBarUpdateAnimation()
     }
 }
