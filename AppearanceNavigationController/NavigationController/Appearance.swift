@@ -7,7 +7,6 @@ public struct Appearance: Equatable {
     public struct Bar: Equatable {
        
         var style: UIBarStyle = .Default
-        
         var backgroundColor = UIColor(red: 234 / 255, green: 46 / 255, blue: 73 / 255, alpha: 1)
         var tintColor = UIColor.whiteColor()
         var barTintColor: UIColor?

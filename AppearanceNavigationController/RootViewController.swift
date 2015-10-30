@@ -1,7 +1,7 @@
 
 import UIKit
 
-class RootViewController: UITableViewController, AppearanceNavigationControllerContext {
+class RootViewController: UITableViewController, NavigationControllerAppearanceContext {
 
     private let values: [Appearance] = (0..<10).map { _ in Appearance.random() }
     
@@ -25,7 +25,7 @@ class RootViewController: UITableViewController, AppearanceNavigationControllerC
     
     // mark: - AppearanceNavigationControllerContext
     
-    func preferredNavigationControllerAppearance(navigationController: AppearanceNavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         return Appearance.lightAppearance
     }
     

@@ -32,7 +32,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         navigationController: UINavigationController,
         willShowViewController viewController: UIViewController, animated: Bool
     ) {
-        guard let appearanceContext = viewController as? AppearanceNavigationControllerContext else {
+        guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
             return
         }
         
@@ -46,7 +46,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
         
         coordinator.animateAlongsideTransition({ _ in }, completion: { context in
-            if context.isCancelled(), let appearanceContext = self.topViewController as? AppearanceNavigationControllerContext {
+            if context.isCancelled(), let appearanceContext = self.topViewController as? NavigationControllerAppearanceContext {
                 // hiding navigation bar & toolbar within interaction completion will result into inconsistent UI state
                 self.setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(self), animated: animated)
                 self.setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(self), animated: animated)
@@ -55,7 +55,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         
         coordinator.notifyWhenInteractionEndsUsingBlock { context in
             let key = UITransitionContextFromViewControllerKey
-            if context.isCancelled(), let from = context.viewControllerForKey(key) as? AppearanceNavigationControllerContext {
+            if context.isCancelled(), let from = context.viewControllerForKey(key) as? NavigationControllerAppearanceContext {
                 // changing navigation bar & toolbar appearance within animate completion will result into UI glitch
                 self.applyAppearance(from.preferredNavigationControllerAppearance(self), animated: true)
             }
@@ -85,7 +85,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     
     func updateAppearanceForViewController(viewController: UIViewController) {
         if let
-            context = viewController as? AppearanceNavigationControllerContext
+            context = viewController as? NavigationControllerAppearanceContext
             where
             viewController == topViewController && transitionCoordinator() == nil
         {
