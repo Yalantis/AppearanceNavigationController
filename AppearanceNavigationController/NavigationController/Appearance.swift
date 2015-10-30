@@ -4,20 +4,28 @@ import UIKit
 
 public struct Appearance: Equatable {
     
-    var navigationBarDropsShadow = false
+    public struct Bar: Equatable {
+       
+        var style: UIBarStyle = .Default
+        
+        var backgroundColor = UIColor(red: 234 / 255, green: 46 / 255, blue: 73 / 255, alpha: 1)
+        var tintColor = UIColor.whiteColor()
+        var barTintColor: UIColor?
+    }
+    
     var statusBarStyle: UIStatusBarStyle = .Default
-    var navigationBarColor = UIColor.clearColor()
-    var navigationBarTintColor = UIColor.clearColor()
-    var toolbarColor = UIColor.clearColor()
-    var toolbarTintColor = UIColor.clearColor()
+    var navigationBar = Bar()
+    var toolbar = Bar()
+}
+
+public func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
+    return
+        lhs.style == rhs.style &&
+        lhs.backgroundColor == rhs.backgroundColor &&
+        lhs.tintColor == rhs.tintColor &&
+        rhs.barTintColor == lhs.barTintColor
 }
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
-    return
-        lhs.navigationBarColor == rhs.navigationBarDropsShadow &&
-        lhs.statusBarStyle == rhs.statusBarStyle &&
-        lhs.navigationBarColor == rhs.navigationBarColor &&
-        lhs.navigationBarTintColor == rhs.navigationBarTintColor &&
-        lhs.toolbarColor == rhs.toolbarColor &&
-        lhs.toolbarTintColor == rhs.toolbarTintColor
+    return lhs.statusBarStyle == rhs.statusBarStyle && lhs.navigationBar == rhs.navigationBar && lhs.toolbar == rhs.toolbar
 }

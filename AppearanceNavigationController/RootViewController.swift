@@ -19,7 +19,7 @@ class RootViewController: UITableViewController, AppearanceNavigationControllerC
         cell.textLabel?.textColor = appearance.navigationBarTintColor
         cell.textLabel?.text = "Sample #\(indexPath.row + 1)"
         cell.textLabel?.backgroundColor = UIColor.clearColor()
-        
+     
         return cell
     }
     

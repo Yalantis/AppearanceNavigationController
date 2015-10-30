@@ -67,7 +67,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     private var appliedAppearance: Appearance?
     
     private func applyAppearance(appearance: Appearance?, animated: Bool) {
-        if appearance != nil {
+        if appearance != nil && appliedAppearance != appearance {
             appliedAppearance = appearance
             
             appearanceApplyingStrategy.apply(appearance, toNavigationController: self, animated: animated)
