@@ -25,6 +25,9 @@ public class AppearanceApplyingStrategy {
                 navigationBar.setBackgroundImage(background, forBarMetrics: .Default)
                 navigationBar.tintColor = appearance.navigationBar.tintColor
                 navigationBar.barTintColor = appearance.navigationBar.barTintColor
+                navigationBar.titleTextAttributes = [
+                    NSForegroundColorAttributeName: appearance.navigationBar.tintColor
+                ]
             }
 
             if !navigationController.toolbarHidden {

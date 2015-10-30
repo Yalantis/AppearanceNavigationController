@@ -8,15 +8,14 @@ extension Appearance {
         var value = Appearance()
         
         let navigationBarColor = UIColor.randomColor()
-        value.navigationBarColor = navigationBarColor
-        value.navigationBarTintColor = navigationBarColor.isBright ? UIColor.blackColor() : UIColor.whiteColor()
+        value.navigationBar.backgroundColor = navigationBarColor
+        value.navigationBar.tintColor = navigationBarColor.isBright ? UIColor.blackColor() : UIColor.whiteColor()
         
         let toolbarColor = UIColor.randomColor()
-        value.toolbarColor = toolbarColor
-        value.toolbarTintColor = toolbarColor.isBright ? UIColor.blackColor() : UIColor.whiteColor()
+        value.toolbar.backgroundColor = toolbarColor
+        value.toolbar.tintColor = toolbarColor.isBright ? UIColor.blackColor() : UIColor.whiteColor()
         
         value.statusBarStyle = navigationBarColor.brightness > 0.5 ? .Default : .LightContent
-        value.navigationBarDropsShadow = arc4random_uniform(2) == 1
         
         return value
     }
@@ -24,9 +23,8 @@ extension Appearance {
     static let lightAppearance: Appearance = {
         var value = Appearance()
         
-        value.navigationBarDropsShadow = true
-        value.navigationBarColor = UIColor.lightGrayColor()
-        value.navigationBarTintColor = UIColor.whiteColor()
+        value.navigationBar.backgroundColor = UIColor.lightGrayColor()
+        value.navigationBar.tintColor = UIColor.whiteColor()
         value.statusBarStyle = .LightContent
         
         return value
@@ -35,12 +33,11 @@ extension Appearance {
     func inverse() -> Appearance {
         var value = Appearance()
         
-        value.navigationBarColor = navigationBarColor.inversedColor
-        value.navigationBarTintColor = navigationBarTintColor.inversedColor
-        value.toolbarColor = toolbarColor.inversedColor
-        value.toolbarTintColor = toolbarTintColor.inversedColor
-        value.statusBarStyle = value.navigationBarColor.brightness > 0.5 ? .Default : .LightContent
-        value.navigationBarDropsShadow = !navigationBarDropsShadow
+        value.navigationBar.backgroundColor = navigationBar.backgroundColor.inverse()
+        value.navigationBar.tintColor = navigationBar.tintColor.inverse()
+        value.toolbar.backgroundColor = toolbar.backgroundColor.inverse()
+        value.toolbar.tintColor = toolbar.tintColor.inverse()
+        value.statusBarStyle = value.navigationBar.backgroundColor.isBright ? .Default : .LightContent
 
         return value
     }
