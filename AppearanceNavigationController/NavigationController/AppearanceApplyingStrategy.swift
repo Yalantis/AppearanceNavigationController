@@ -20,25 +20,22 @@ public class AppearanceApplyingStrategy {
                 }
             }
             
-        if !navigationController.navigationBarHidden {
-            let background = ImageRenderer.renderImageOfColor(appearance.navigationBarColor)
-            navigationBar.setBackgroundImage(background, forBarMetrics: .Default)
-            navigationBar.tintColor = appearance.navigationBarTintColor
-            
-            navigationBar.shadowImage = appearance.navigationBarDropsShadow ? nil : UIImage()
-            navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: appearance.navigationBarTintColor
-            ]
-        }
+            if !navigationController.navigationBarHidden {
+                let background = ImageRenderer.renderImageOfColor(appearance.navigationBar.backgroundColor)
+                navigationBar.setBackgroundImage(background, forBarMetrics: .Default)
+                navigationBar.tintColor = appearance.navigationBar.tintColor
+                navigationBar.barTintColor = appearance.navigationBar.barTintColor
+            }
 
-        if !navigationController.toolbarHidden {
-            toolbar.setBackgroundImage(
-                ImageRenderer.renderImageOfColor(appearance.toolbarColor),
-                forToolbarPosition: .Any,
-                barMetrics: .Default
-            )
-            toolbar.tintColor = appearance.toolbarTintColor
-        }
+            if !navigationController.toolbarHidden {
+                toolbar.setBackgroundImage(
+                    ImageRenderer.renderImageOfColor(appearance.toolbar.backgroundColor),
+                    forToolbarPosition: .Any,
+                    barMetrics: .Default
+                )
+                toolbar.tintColor = appearance.toolbar.tintColor
+                toolbar.barTintColor = appearance.toolbar.barTintColor
+            }
         }
     }
 }

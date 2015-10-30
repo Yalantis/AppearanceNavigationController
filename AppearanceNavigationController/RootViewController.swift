@@ -15,8 +15,8 @@ class RootViewController: UITableViewController, AppearanceNavigationControllerC
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! // fine for sample app
         let appearance = values[indexPath.row]
         
-        cell.contentView.backgroundColor = appearance.navigationBarColor
-        cell.textLabel?.textColor = appearance.navigationBarTintColor
+        cell.contentView.backgroundColor = appearance.navigationBar.backgroundColor
+        cell.textLabel?.textColor = appearance.navigationBar.tintColor
         cell.textLabel?.text = "Sample #\(indexPath.row + 1)"
         cell.textLabel?.backgroundColor = UIColor.clearColor()
      
