@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import QuartzCore
 
 public class AppearanceApplyingStrategy {
     
@@ -7,18 +8,6 @@ public class AppearanceApplyingStrategy {
         if let appearance = appearance {
             let navigationBar = navigationController.navigationBar
             let toolbar = navigationController.toolbar
-            
-            if animated {
-                UIView.beginAnimations("transition", context: nil)
-                UIView.setAnimationBeginsFromCurrentState(true)
-                UIView.setAnimationDuration(0.33)
-                UIView.setAnimationTransition(.None, forView: navigationBar, cache: false)
-                UIView.setAnimationTransition(.None, forView: toolbar, cache: false)
-                
-                defer {
-                    UIView.commitAnimations()
-                }
-            }
             
             if !navigationController.navigationBarHidden {
                 let background = ImageRenderer.renderImageOfColor(appearance.navigationBar.backgroundColor)

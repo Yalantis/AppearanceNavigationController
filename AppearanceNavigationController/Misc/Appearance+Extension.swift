@@ -20,6 +20,18 @@ extension Appearance {
         return value
     }
     
+    func inverse() -> Appearance {
+        var value = Appearance()
+        
+        value.navigationBar.backgroundColor = navigationBar.backgroundColor.inverse()
+        value.navigationBar.tintColor = navigationBar.tintColor.inverse()
+        value.toolbar.backgroundColor = toolbar.backgroundColor.inverse()
+        value.toolbar.tintColor = toolbar.tintColor.inverse()
+        value.statusBarStyle = value.navigationBar.backgroundColor.isBright ? .Default : .LightContent
+        
+        return value
+    }
+    
     static let lightAppearance: Appearance = {
         var value = Appearance()
         
@@ -29,16 +41,4 @@ extension Appearance {
         
         return value
     }()
-    
-    func inverse() -> Appearance {
-        var value = Appearance()
-        
-        value.navigationBar.backgroundColor = navigationBar.backgroundColor.inverse()
-        value.navigationBar.tintColor = navigationBar.tintColor.inverse()
-        value.toolbar.backgroundColor = toolbar.backgroundColor.inverse()
-        value.toolbar.tintColor = toolbar.tintColor.inverse()
-        value.statusBarStyle = value.navigationBar.backgroundColor.isBright ? .Default : .LightContent
-
-        return value
-    }
 }
