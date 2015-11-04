@@ -1,5 +1,5 @@
 #AppearanceNavigationController
-Sample of navigation controller appearance configuration from our [blog post](https://yalantis.com/blog/).
+Sample of navigation controller appearance configuration from our [blog post](https://yalantis.com/blog/declarative-navigation-bar-appearance-configuration/).
 
 #License
 The MIT License (MIT)
