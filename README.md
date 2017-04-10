@@ -1,8 +1,8 @@
-#AppearanceNavigationController
+# AppearanceNavigationController
 Sample of navigation controller appearance configuration from our [blog post](https://yalantis.com/blog/declarative-navigation-bar-appearance-configuration/).
 
 
-####Declarative Navigation Bar Appearance Configuration
+#### Declarative Navigation Bar Appearance Configuration
 
 The last couple of month I’ve been working on an app that required implementation of color changing behavior. 
 
@@ -16,7 +16,7 @@ But with this implementation I shortly found my view controllers full of unneces
 
 Given this nuicance I decided to refactor `UIViewController.viewWillAppear` and turn it into a small and handy tool that could free view controllers from repeated imperative appearance configurations. I wanted my implementation to have a UIKit-like declarative style as `UIViewController.preferredStatusBarStyle`. Under this logic, view controllers will be asked the number of questions or requirements that tell them how to behave. 
 
-####The principle of work of AppearanceNavigationController 
+#### The principle of work of AppearanceNavigationController 
 
 To achieve a declarative behaviour we need to become a UINavigationControllerDelegate to handle push and pop between the view controllers.
 
@@ -125,7 +125,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
 }
 ```
 
-####Appearance Configuration
+#### Appearance Configuration
 
 Now it’s time to implement the appearance applying the details: 
 
@@ -156,7 +156,7 @@ private func applyAppearance(appearance: Appearance?, animated: Bool) {
 ```
 If the View Controller’s appearance isn’t nil, we need to apply the apprearance differently – just ignore it. Code, that applies the appearance is fairly simple, except `ImageRenderer.renderImageOfColor(color)` which returns a colored image with 1x1 pixel size.
 
-####Status bar configuration
+#### Status bar configuration
 
 Note, that status bar style comes in pair with the `Appearance` and not via `UIViewController.preferredStatusBarStyle()`. This is because a status bar visibility depends on the navigation bar color brightness, so I decided to keep this “knowledge” about colors in a single place instead of putting it in two separate places.
 
@@ -186,7 +186,7 @@ public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation
 ```
 Since we’re going to use UIKit’s preferred way of Status Bar appearance change, the applied `Appearance` needs to be preserved. Also, if there is no appearance applied we’re switching to the default super’s implementation. 
 
-####Appearance Update
+#### Appearance Update
 
 Obvisouly, the view controller appearance may change during its lifecycle. In order to update the view controller let’s add a UIKit-like method `NavigationControllerAppearanceContext`:
 
@@ -233,7 +233,7 @@ public func updateAppearance() {
 ```
 From this point any `AppearanceNavigationControllerContext` can ask its container to re-run the appearance configuration in case something gets changed (editing mode, for example). By various checks like `viewController == topViewController` and `transitionCoordinator() == nil` we’re disallowing appearance change invoked by an invisible view controller or happened during the interactive pop gesture.
 
-####Usage
+#### Usage
 We’re done with the implementation. Now any view controller can define an appearance context, change appearance in the middle of the lifecycle and so on:
 ```swift
 class ContentViewController: UIViewController, NavigationControllerAppearanceContext {
@@ -266,7 +266,7 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
 }
 
 ```
-####Gathering the appearance together
+#### Gathering the appearance together
 
 Now we can gather all the appearance configurations as a category with common configurations, thus eliminating code duplication as in the naive solution:
 ```swift
@@ -284,7 +284,7 @@ extension Appearance {
 }
 ```
 
-####Customizing the appearance 
+#### Customizing the appearance 
 
 To make the animation more customizeable let’s wrap it into the `AppearanceApplyingStrategy`, hence anyone can extend this behaviour by providing a custom strategy:
 ```swift
