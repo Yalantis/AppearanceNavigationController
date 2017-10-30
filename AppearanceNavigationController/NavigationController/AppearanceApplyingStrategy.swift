@@ -2,16 +2,16 @@ import Foundation
 import UIKit
 import QuartzCore
 
-public class AppearanceApplyingStrategy {
+open class AppearanceApplyingStrategy {
     
-    public func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, animated: Bool) {
+    open func apply(_ appearance: Appearance?, toNavigationController navigationController: UINavigationController, animated: Bool) {
         if let appearance = appearance {
             let navigationBar = navigationController.navigationBar
             let toolbar = navigationController.toolbar
             
-            if !navigationController.navigationBarHidden {
+            if !navigationController.isNavigationBarHidden {
                 let background = ImageRenderer.renderImageOfColor(appearance.navigationBar.backgroundColor)
-                navigationBar.setBackgroundImage(background, forBarMetrics: .Default)
+                navigationBar.setBackgroundImage(background, for: .default)
                 navigationBar.tintColor = appearance.navigationBar.tintColor
                 navigationBar.barTintColor = appearance.navigationBar.barTintColor
                 navigationBar.titleTextAttributes = [
@@ -19,14 +19,14 @@ public class AppearanceApplyingStrategy {
                 ]
             }
 
-            if !navigationController.toolbarHidden {
-                toolbar.setBackgroundImage(
+            if !navigationController.isToolbarHidden {
+                toolbar?.setBackgroundImage(
                     ImageRenderer.renderImageOfColor(appearance.toolbar.backgroundColor),
-                    forToolbarPosition: .Any,
-                    barMetrics: .Default
+                    forToolbarPosition: .any,
+                    barMetrics: .default
                 )
-                toolbar.tintColor = appearance.toolbar.tintColor
-                toolbar.barTintColor = appearance.toolbar.barTintColor
+                toolbar?.tintColor = appearance.toolbar.tintColor
+                toolbar?.barTintColor = appearance.toolbar.barTintColor
             }
         }
     }
