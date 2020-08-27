@@ -131,23 +131,23 @@ Now it’s time to implement the appearance applying the details:
 private func applyAppearance(appearance: Appearance?, animated: Bool) {
     if let appearance = appearance {
         if !navigationBarHidden {
-            let background = ImageRenderer.renderImageOfColor(appearance.navigationBarColor)
-            navigationBar.setBackgroundImage(background, forBarMetrics: .Default)
-            navigationBar.tintColor = appearance.navigationBarTintColor
-            
-            navigationBar.shadowImage = appearance.navigationBarDropsShadow ? nil : UIImage()
+            let background = ImageRenderer.renderImageOfColor(color: appearance.navigationBar.backgroundColor)
+            navigationBar.setBackgroundImage(background, for: .default)
+            navigationBar.tintColor = appearance.navigationBar.tintColor
+            navigationBar.barTintColor = appearance.navigationBar.barTintColor
             navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: appearance.navigationBarTintColor
+                NSAttributedString.Key.foregroundColor: appearance.navigationBar.tintColor
             ]
         }
 
         if !toolbarHidden {
-            toolbar.setBackgroundImage(
-                ImageRenderer.renderImageOfColor(appearance.toolbarColor),
-                forToolbarPosition: .Any,
-                barMetrics: .Default
+            toolbar?.setBackgroundImage(
+                ImageRenderer.renderImageOfColor(color: appearance.toolbar.backgroundColor),
+                forToolbarPosition: .any,
+                barMetrics: .default
             )
-            toolbar.tintColor = appearance.toolbarTintColor
+            toolbar?.tintColor = appearance.toolbar.tintColor
+            toolbar?.barTintColor = appearance.toolbar.barTintColor
         }
     }
 }
