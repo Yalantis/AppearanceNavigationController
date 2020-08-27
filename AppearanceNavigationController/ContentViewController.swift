@@ -7,7 +7,7 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        navigationItem.rightBarButtonItem = editButtonItem()
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
     var appearance: Appearance? {
@@ -18,7 +18,7 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
     
     // mark: - Actions
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         setNeedsUpdateNavigationControllerAppearance()
@@ -28,11 +28,11 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
 
     func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
         // hide toolbar during editing
-        return editing
+        return isEditing
     }
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         // inverse navigation bar color and status bar during editing
-        return editing ? appearance?.inverse() : appearance
+        return isEditing ? appearance?.inverse() : appearance
     }
 }

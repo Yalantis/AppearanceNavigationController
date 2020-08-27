@@ -28,9 +28,9 @@ extension NavigationControllerAppearanceContext {
     func setNeedsUpdateNavigationControllerAppearance() {
         if let
             viewController = self as? UIViewController,
-            navigationController = viewController.navigationController as? AppearanceNavigationController
+            let navigationController = viewController.navigationController as? AppearanceNavigationController
         {
-            navigationController.updateAppearanceForViewController(viewController)
+            navigationController.updateAppearanceForViewController(viewController: viewController)
         }
     }
 }

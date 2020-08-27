@@ -9,13 +9,13 @@ extension Appearance {
         
         let navigationBarColor = UIColor.randomColor()
         value.navigationBar.backgroundColor = navigationBarColor
-        value.navigationBar.tintColor = navigationBarColor.isBright ? UIColor.blackColor() : UIColor.whiteColor()
+        value.navigationBar.tintColor = navigationBarColor.isBright ? .black : .white
         
         let toolbarColor = UIColor.randomColor()
         value.toolbar.backgroundColor = toolbarColor
-        value.toolbar.tintColor = toolbarColor.isBright ? UIColor.blackColor() : UIColor.whiteColor()
+        value.toolbar.tintColor = toolbarColor.isBright ? .black : .white
         
-        value.statusBarStyle = navigationBarColor.brightness > 0.5 ? .Default : .LightContent
+        value.statusBarStyle = navigationBarColor.brightness > 0.5 ? .default : .lightContent
         
         return value
     }
@@ -27,7 +27,7 @@ extension Appearance {
         value.navigationBar.tintColor = navigationBar.tintColor.inverse()
         value.toolbar.backgroundColor = toolbar.backgroundColor.inverse()
         value.toolbar.tintColor = toolbar.tintColor.inverse()
-        value.statusBarStyle = value.navigationBar.backgroundColor.isBright ? .Default : .LightContent
+        value.statusBarStyle = value.navigationBar.backgroundColor.isBright ? .default : .lightContent
         
         return value
     }
@@ -35,9 +35,9 @@ extension Appearance {
     static let lightAppearance: Appearance = {
         var value = Appearance()
         
-        value.navigationBar.backgroundColor = UIColor.lightGrayColor()
-        value.navigationBar.tintColor = UIColor.whiteColor()
-        value.statusBarStyle = .LightContent
+        value.navigationBar.backgroundColor = .lightGray
+        value.navigationBar.tintColor = .white
+        value.statusBarStyle = .lightContent
         
         return value
     }()
