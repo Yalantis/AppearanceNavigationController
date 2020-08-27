@@ -5,7 +5,7 @@ import UIKit
 public struct Appearance: Equatable {
     
     public struct Bar: Equatable {
-       
+        
         var style: UIBarStyle = .default
         var backgroundColor = UIColor(red: 234 / 255, green: 46 / 255, blue: 73 / 255, alpha: 1)
         var tintColor = UIColor.white
@@ -18,8 +18,7 @@ public struct Appearance: Equatable {
 }
 
 public func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
-    return
-        lhs.style == rhs.style &&
+    return lhs.style == rhs.style &&
         lhs.backgroundColor == rhs.backgroundColor &&
         lhs.tintColor == rhs.tintColor &&
         rhs.barTintColor == lhs.barTintColor

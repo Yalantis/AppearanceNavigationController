@@ -18,7 +18,7 @@ public class AppearanceApplyingStrategy {
                     NSAttributedString.Key.foregroundColor: appearance.navigationBar.tintColor
                 ]
             }
-
+            
             if !navigationController.isToolbarHidden {
                 toolbar?.setBackgroundImage(
                     ImageRenderer.renderImageOfColor(color: appearance.toolbar.backgroundColor),

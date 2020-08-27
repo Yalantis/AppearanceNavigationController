@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 
 public class AppearanceNavigationController: UINavigationController, UINavigationControllerDelegate {
-
+    
     public required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
@@ -12,13 +12,13 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
+        
         delegate = self
     }
-
+    
     override public init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-
+        
         delegate = self
     }
     
@@ -61,7 +61,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
             }
         }
     }
-
+    
     // mark: - Appearance Applying
     
     private var appliedAppearance: Appearance?
@@ -91,7 +91,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
             applyAppearance(appearance: context.preferredNavigationControllerAppearance(navigationController: self), animated: true)
         }
     }
-
+    
     public func updateAppearance() {
         if let top = topViewController {
             updateAppearanceForViewController(viewController: top)

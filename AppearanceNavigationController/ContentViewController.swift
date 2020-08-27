@@ -25,7 +25,7 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
     }
     
     // mark: - AppearanceNavigationControllerContent
-
+    
     func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
         // hide toolbar during editing
         return isEditing

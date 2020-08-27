@@ -35,13 +35,13 @@ public struct Appearance: Equatable {
     
     public struct Bar: Equatable {
        
-        var style: UIBarStyle = .Default       
+        var style: UIBarStyle = .default
         var backgroundColor = UIColor(red: 234 / 255, green: 46 / 255, blue: 73 / 255, alpha: 1)
-        var tintColor = UIColor.whiteColor()
+        var tintColor = UIColor.white
         var barTintColor: UIColor?
     }
     
-    var statusBarStyle: UIStatusBarStyle = .Default
+    var statusBarStyle: UIStatusBarStyle = .default
     var navigationBar = Bar()
     var toolbar = Bar()
 }
@@ -74,8 +74,6 @@ extension NavigationControllerAppearanceContext {
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         return nil
     }
-}
-
 ```
 
 As you may have noticed `preferredNavigationControllerAppearance` allows us to return `nil` which is useful to interpret as “Ok, this controller doesn’t want to affect the current appearance”. 
@@ -90,12 +88,12 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         delegate = self
     }
     
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
         delegate = self
     }
-    
+
     override public init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
 
@@ -105,16 +103,16 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     // MARK: - UINavigationControllerDelegate
     
     public func navigationController(
-        navigationController: UINavigationController,
-        willShowViewController viewController: UIViewController, animated: Bool
+        _ navigationController: UINavigationController,
+        willShow viewController: UIViewController, animated: Bool
     ) {
         guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
             return
         }
-        
-        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(self), animated: animated)
-        setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(self), animated: animated)
-        applyAppearance(appearanceContext.preferredNavigationControllerAppearance(self), animated: animated)
+        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
+        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
+        setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(navigationController: self), animated: animated)
+        applyAppearance(appearance: appearanceContext.preferredNavigationControllerAppearance(navigationController: self), animated: animated)
     }
 
     // mark: - Appearance Applying
@@ -175,14 +173,13 @@ private func applyAppearance(appearance: Appearance?, animated: Bool) {
 
 // mark: - Status Bar 
 
-public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return appliedAppearance?.statusBarStyle ?? super.preferredStatusBarStyle()
+public override var preferredStatusBarStyle: UIStatusBarStyle {
+    appliedAppearance?.statusBarStyle ?? super.preferredStatusBarStyle
 }
 
-public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-    return appliedAppearance != nil ? .Fade : super.preferredStatusBarUpdateAnimation()
+public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    appliedAppearance != nil ? .fade : super.preferredStatusBarUpdateAnimation
 }
-
 ```
 Since we’re going to use UIKit’s preferred way of Status Bar appearance change, the applied `Appearance` needs to be preserved. Also, if there is no appearance applied we’re switching to the default super’s implementation. 
 
@@ -201,11 +198,9 @@ extension NavigationControllerAppearanceContext {
     // rest of the defaul implementation
 
     func setNeedsUpdateNavigationControllerAppearance() {
-        if let
-            viewController = self as? UIViewController,
-            navigationController = viewController.navigationController as? AppearanceNavigationController
-        {
-            navigationController.updateAppearanceForViewController(viewController)
+        if let viewController = self as? UIViewController,
+            let navigationController = viewController.navigationController as? AppearanceNavigationController {
+            navigationController.updateAppearanceForViewController(viewController: viewController)
         }
     }
 }
@@ -214,20 +209,17 @@ extension NavigationControllerAppearanceContext {
 And a corresponding implementation in the `AppearanceNavigationController`:
 ```swift
 func updateAppearanceForViewController(viewController: UIViewController) {
-    if let
-        context = viewController as? NavigationControllerAppearanceContext
-        where
-        viewController == topViewController && transitionCoordinator() == nil
-    {
-        setNavigationBarHidden(context.prefersNavigationControllerBarHidden(self), animated: true)
-        setToolbarHidden(context.prefersNavigationControllerToolbarHidden(self), animated: true)
-        applyAppearance(context.preferredNavigationControllerAppearance(self), animated: true)
+    if let context = viewController as? NavigationControllerAppearanceContext,
+        viewController == topViewController && transitionCoordinator == nil {
+        setNavigationBarHidden(context.prefersNavigationControllerBarHidden(navigationController: self), animated: true)
+        setToolbarHidden(context.prefersNavigationControllerToolbarHidden(navigationController: self), animated: true)
+        applyAppearance(appearance: context.preferredNavigationControllerAppearance(navigationController: self), animated: true)
     }
 }
 
 public func updateAppearance() {
     if let top = topViewController {
-        updateAppearanceForViewController(top)
+        updateAppearanceForViewController(viewController: top)
     }
 }
 ```
@@ -238,6 +230,12 @@ We’re done with the implementation. Now any view controller can define an appe
 ```swift
 class ContentViewController: UIViewController, NavigationControllerAppearanceContext {
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
     var appearance: Appearance? {
         didSet {
             setNeedsUpdateNavigationControllerAppearance()
@@ -246,7 +244,7 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
     
     // mark: - Actions
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         setNeedsUpdateNavigationControllerAppearance()
@@ -256,15 +254,14 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
 
     func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
         // hide toolbar during editing
-        return editing
+        return isEditing
     }
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         // inverse navigation bar color and status bar during editing
-        return editing ? appearance?.inversedAppearance : appearance
+        return isEditing ? appearance?.inverse() : appearance
     }
 }
-
 ```
 #### Gathering the appearance together
 
@@ -275,9 +272,9 @@ extension Appearance {
     static let lightAppearance: Appearance = {
         var value = Appearance()
         
-        value.navigationBar.backgroundColor = UIColor.lightGrayColor()
-        value.navigationBar.tintColor = UIColor.whiteColor()
-        value.statusBarStyle = .LightContent
+        value.navigationBar.backgroundColor = .lightGray
+        value.navigationBar.tintColor = .white
+        value.statusBarStyle = .lightContent
         
         return value
     }()
@@ -299,18 +296,18 @@ public class AppearanceApplyingStrategy {
 And connect the strategy to the `AppearanceNavigationController`:
 ```swift
 private func applyAppearance(appearance: Appearance?, animated: Bool) {
-        // we ignore nil appearance
-        if appearance != nil && appliedAppearance != appearance {
-            appliedAppearance = appearance
-            
-            appearanceApplyingStrategy.apply(appearance, toNavigationController: self, animated: animated)
-            setNeedsStatusBarAppearanceUpdate()
-        }
+    // we ignore nil appearance
+    if appearance != nil && appliedAppearance != appearance {
+        appliedAppearance = appearance
+        
+        appearanceApplyingStrategy.apply(appearance: appearance, toNavigationController: self, animated: animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
 
 public var appearanceApplyingStrategy = AppearanceApplyingStrategy() {
     didSet {
-        applyAppearance(appliedAppearance, animated: false)
+        applyAppearance(appearance: appliedAppearance, animated: false)
     }
 }
 ```

@@ -20,6 +20,8 @@
 		ADF894BB1BE0F66000C35CAC /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894BA1BE0F66000C35CAC /* ContentViewController.swift */; };
 		ADF894BD1BE0FFA100C35CAC /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894BC1BE0FFA100C35CAC /* AppearanceApplyingStrategy.swift */; };
 		ADF894BF1BE117D500C35CAC /* NavigationControllerAppearanceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF894BE1BE117D500C35CAC /* NavigationControllerAppearanceContext.swift */; };
+		D215861A24F7D32500525A60 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D215861824F7D32500525A60 /* README.md */; };
+		D215861B24F7D32500525A60 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D215861924F7D32500525A60 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		ADF894BA1BE0F66000C35CAC /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		ADF894BC1BE0FFA100C35CAC /* AppearanceApplyingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceApplyingStrategy.swift; sourceTree = "<group>"; };
 		ADF894BE1BE117D500C35CAC /* NavigationControllerAppearanceContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerAppearanceContext.swift; sourceTree = "<group>"; };
+		D215861824F7D32500525A60 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D215861924F7D32500525A60 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 		ADF8948E1BE0D3C800C35CAC = {
 			isa = PBXGroup;
 			children = (
+				D215861924F7D32500525A60 /* LICENSE */,
+				D215861824F7D32500525A60 /* README.md */,
 				ADF894991BE0D3C800C35CAC /* AppearanceNavigationController */,
 				ADF894981BE0D3C800C35CAC /* Products */,
 			);
@@ -164,7 +170,9 @@
 			files = (
 				ADF894A51BE0D3C800C35CAC /* LaunchScreen.storyboard in Resources */,
 				ADF894A21BE0D3C800C35CAC /* Assets.xcassets in Resources */,
+				D215861A24F7D32500525A60 /* README.md in Resources */,
 				ADF894A01BE0D3C800C35CAC /* Main.storyboard in Resources */,
+				D215861B24F7D32500525A60 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
