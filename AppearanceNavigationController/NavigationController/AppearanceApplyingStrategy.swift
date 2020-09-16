@@ -4,7 +4,9 @@ import QuartzCore
 
 public class AppearanceApplyingStrategy {
     
-    public func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, animated: Bool) {
+    public func apply(appearance: Appearance?,
+                      toNavigationController navigationController: UINavigationController,
+                      animated: Bool) {
         if let appearance = appearance {
             let navigationBar = navigationController.navigationBar
             let toolbar = navigationController.toolbar

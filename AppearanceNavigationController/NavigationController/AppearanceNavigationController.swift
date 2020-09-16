@@ -35,10 +35,10 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
             return
         }
-        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
-        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
-        setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(navigationController: self), animated: animated)
-        applyAppearance(appearance: appearanceContext.preferredNavigationControllerAppearance(navigationController: self), animated: animated)
+        setNavigationBarHidden(appearanceContext.prefersBarHidden(for: self), animated: animated)
+        setNavigationBarHidden(appearanceContext.prefersBarHidden(for: self), animated: animated)
+        setToolbarHidden(appearanceContext.prefersToolbarHidden(for: self), animated: animated)
+        applyAppearance(appearance: appearanceContext.preferredAppearance(for: self), animated: animated)
         
         // interactive gesture requires more complex logic. 
         guard let coordinator = viewController.transitionCoordinator, coordinator.isInteractive else {
@@ -46,18 +46,19 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
         
         coordinator.animate(alongsideTransition: { _ in }) { (context) in
-            if context.isCancelled, let appearanceContext = self.topViewController as? NavigationControllerAppearanceContext {
+            if context.isCancelled,
+                let appearanceContext = self.topViewController as? NavigationControllerAppearanceContext {
                 // hiding navigation bar & toolbar within interaction completion will result into inconsistent UI state
-                self.setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
-                self.setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(navigationController: self), animated: animated)
+                self.setNavigationBarHidden(appearanceContext.prefersBarHidden(for: self), animated: animated)
+                self.setToolbarHidden(appearanceContext.prefersToolbarHidden(for: self), animated: animated)
             }
         }
         
         coordinator.notifyWhenInteractionEnds { (context) in
-            let key = UITransitionContextViewControllerKey.from
-            if context.isCancelled, let from = context.viewController(forKey: key) as? NavigationControllerAppearanceContext {
+            if context.isCancelled,
+                let from = context.viewController(forKey: .from) as? NavigationControllerAppearanceContext {
                 // changing navigation bar & toolbar appearance within animate completion will result into UI glitch
-                self.applyAppearance(appearance: from.preferredNavigationControllerAppearance(navigationController: self), animated: animated)
+                self.applyAppearance(appearance: from.preferredAppearance(for: self), animated: animated)
             }
         }
     }
@@ -83,18 +84,18 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     
     // mark: - Apperanace Update
     
-    func updateAppearanceForViewController(viewController: UIViewController) {
+    func updateAppearance(for viewController: UIViewController) {
         if let context = viewController as? NavigationControllerAppearanceContext,
             viewController == topViewController && transitionCoordinator == nil {
-            setNavigationBarHidden(context.prefersNavigationControllerBarHidden(navigationController: self), animated: true)
-            setToolbarHidden(context.prefersNavigationControllerToolbarHidden(navigationController: self), animated: true)
-            applyAppearance(appearance: context.preferredNavigationControllerAppearance(navigationController: self), animated: true)
+            setNavigationBarHidden(context.prefersBarHidden(for: self), animated: true)
+            setToolbarHidden(context.prefersToolbarHidden(for: self), animated: true)
+            applyAppearance(appearance: context.preferredAppearance(for: self), animated: true)
         }
     }
     
     public func updateAppearance() {
         if let top = topViewController {
-            updateAppearanceForViewController(viewController: top)
+            updateAppearance(for: top)
         }
     }
     

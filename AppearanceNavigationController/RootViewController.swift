@@ -25,7 +25,7 @@ class RootViewController: UITableViewController, NavigationControllerAppearanceC
     
     // mark: - AppearanceNavigationControllerContext
     
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredAppearance(for navigationController: UINavigationController) -> Appearance? {
         return Appearance.lightAppearance
     }
     

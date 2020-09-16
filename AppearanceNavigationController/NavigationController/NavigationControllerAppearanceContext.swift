@@ -4,31 +4,31 @@ import UIKit
 
 public protocol NavigationControllerAppearanceContext: class {
     
-    func prefersNavigationControllerBarHidden(navigationController: UINavigationController) -> Bool
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance?
+    func prefersBarHidden(for navigationController: UINavigationController) -> Bool
+    func prefersToolbarHidden(for navigationController: UINavigationController) -> Bool
+    func preferredAppearance(for navigationController: UINavigationController) -> Appearance?
     
     func setNeedsUpdateNavigationControllerAppearance()
 }
 
 extension NavigationControllerAppearanceContext {
     
-    func prefersNavigationControllerBarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersBarHidden(for navigationController: UINavigationController) -> Bool {
         return false
     }
     
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersToolbarHidden(for navigationController: UINavigationController) -> Bool {
         return true
     }
     
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredAppearance(for navigationController: UINavigationController) -> Appearance? {
         return nil
     }
     
     func setNeedsUpdateNavigationControllerAppearance() {
         if let viewController = self as? UIViewController,
             let navigationController = viewController.navigationController as? AppearanceNavigationController {
-            navigationController.updateAppearanceForViewController(viewController: viewController)
+            navigationController.updateAppearance(for: viewController)
         }
     }
 }
