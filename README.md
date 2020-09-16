@@ -52,9 +52,9 @@ As you remember, we’re going to “ask” our view controller about the prefer
 ```swift
 public protocol NavigationControllerAppearanceContext: class {
     
-    func prefersNavigationControllerBarHidden(navigationController: UINavigationController) -> Bool
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance?
+    func prefersBarHidden(for navigationController: UINavigationController) -> Bool
+    func prefersToolbarHidden(for navigationController: UINavigationController) -> Bool
+    func preferredAppearance(for navigationController: UINavigationController) -> Appearance?
 }
 ```
 
@@ -63,17 +63,18 @@ Since not every `UIViewController` will configure appearance, we’re not going 
 ```swift
 extension NavigationControllerAppearanceContext {
     
-    func prefersNavigationControllerBarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersBarHidden(for navigationController: UINavigationController) -> Bool {
         return false
     }
     
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersToolbarHidden(for navigationController: UINavigationController) -> Bool {
         return true
     }
     
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredAppearance(for navigationController: UINavigationController) -> Appearance? {
         return nil
     }
+}
 ```
 
 As you may have noticed `preferredNavigationControllerAppearance` allows us to return `nil` which is useful to interpret as “Ok, this controller doesn’t want to affect the current appearance”. 
@@ -109,10 +110,10 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
             return
         }
-        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
-        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(navigationController: self), animated: animated)
-        setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(navigationController: self), animated: animated)
-        applyAppearance(appearance: appearanceContext.preferredNavigationControllerAppearance(navigationController: self), animated: animated)
+        setNavigationBarHidden(appearanceContext.prefersBarHidden(for: self), animated: animated)
+        setNavigationBarHidden(appearanceContext.prefersBarHidden(for: self), animated: animated)
+        setToolbarHidden(appearanceContext.prefersToolbarHidden(for: self), animated: animated)
+        applyAppearance(appearance: appearanceContext.preferredAppearance(for: self), animated: animated)
     }
 
     // mark: - Appearance Applying
@@ -200,7 +201,7 @@ extension NavigationControllerAppearanceContext {
     func setNeedsUpdateNavigationControllerAppearance() {
         if let viewController = self as? UIViewController,
             let navigationController = viewController.navigationController as? AppearanceNavigationController {
-            navigationController.updateAppearanceForViewController(viewController: viewController)
+            navigationController.updateAppearance(for: viewController)
         }
     }
 }
@@ -208,18 +209,18 @@ extension NavigationControllerAppearanceContext {
 ```
 And a corresponding implementation in the `AppearanceNavigationController`:
 ```swift
-func updateAppearanceForViewController(viewController: UIViewController) {
+func updateAppearance(for viewController: UIViewController) {
     if let context = viewController as? NavigationControllerAppearanceContext,
         viewController == topViewController && transitionCoordinator == nil {
-        setNavigationBarHidden(context.prefersNavigationControllerBarHidden(navigationController: self), animated: true)
-        setToolbarHidden(context.prefersNavigationControllerToolbarHidden(navigationController: self), animated: true)
-        applyAppearance(appearance: context.preferredNavigationControllerAppearance(navigationController: self), animated: true)
+        setNavigationBarHidden(context.prefersBarHidden(for: self), animated: true)
+        setToolbarHidden(context.prefersToolbarHidden(for: self), animated: true)
+        applyAppearance(appearance: context.preferredAppearance(for: self), animated: true)
     }
 }
 
 public func updateAppearance() {
     if let top = topViewController {
-        updateAppearanceForViewController(viewController: top)
+        updateAppearance(for: top)
     }
 }
 ```
@@ -252,12 +253,12 @@ class ContentViewController: UIViewController, NavigationControllerAppearanceCon
     
     // mark: - AppearanceNavigationControllerContent
 
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersToolbarHidden(for navigationController: UINavigationController) -> Bool {
         // hide toolbar during editing
         return isEditing
     }
     
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredAppearance(for navigationController: UINavigationController) -> Appearance? {
         // inverse navigation bar color and status bar during editing
         return isEditing ? appearance?.inverse() : appearance
     }
@@ -296,7 +297,7 @@ public class AppearanceApplyingStrategy {
 And connect the strategy to the `AppearanceNavigationController`:
 ```swift
 private func applyAppearance(appearance: Appearance?, animated: Bool) {
-    // we ignore nil appearance
+// we ignore nil appearance
     if appearance != nil && appliedAppearance != appearance {
         appliedAppearance = appearance
         
